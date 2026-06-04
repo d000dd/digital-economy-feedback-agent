@@ -1,0 +1,14 @@
+[project]
+name = "digital-economy-feedback-agent"
+version = "0.1.0"
+description = "数字经济课程反馈分析与飞书通知智能体"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+feedback-agent = "feedback_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

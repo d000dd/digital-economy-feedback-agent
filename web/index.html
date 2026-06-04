@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>数字经济反馈智能体</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark">DE</span>
+        <div>
+          <h1>数字经济反馈智能体</h1>
+          <p>Feedback analysis, report generation, and Feishu delivery.</p>
+        </div>
+      </div>
+      <div class="status-row">
+        <span id="aiBadge" class="status-chip">AI 检测中</span>
+        <span id="statusText" class="status-chip muted">Ready</span>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="panel input-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">INPUT</p>
+            <h2>反馈文本</h2>
+          </div>
+          <input id="fileInput" type="file" accept=".csv,.txt" />
+        </div>
+        <textarea
+          id="feedbackText"
+          spellcheck="false"
+          placeholder="每行一条反馈，或上传 CSV/TXT。"
+        ></textarea>
+        <div class="action-row">
+          <button id="analyzeBtn" class="primary">分析反馈</button>
+          <button id="sampleBtn">载入样例</button>
+          <button id="clearBtn">清空</button>
+        </div>
+      </section>
+
+      <section class="panel insight-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">INSIGHT</p>
+            <h2>分析总览</h2>
+          </div>
+          <span id="generatedAt" class="tiny">未生成</span>
+        </div>
+        <div class="stat-grid">
+          <div>
+            <span>反馈总数</span>
+            <strong id="metricTotal">0</strong>
+          </div>
+          <div>
+            <span>负向反馈</span>
+            <strong id="metricNegative">0</strong>
+          </div>
+          <div>
+            <span>高优先级</span>
+            <strong id="metricHigh">0</strong>
+          </div>
+        </div>
+        <p id="summaryText" class="summary-copy">等待输入。</p>
+        <div id="categoryBars" class="topic-list"></div>
+      </section>
+
+      <section class="panel action-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">ACTION</p>
+            <h2>建议动作</h2>
+          </div>
+          <button id="csvBtn" disabled>导出 CSV</button>
+        </div>
+        <div id="recommendations" class="recommendations">
+          <p class="empty-line">分析后生成可执行建议。</p>
+        </div>
+      </section>
+
+      <section class="panel report-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">REPORT</p>
+            <h2>报告与飞书</h2>
+          </div>
+          <button id="markdownBtn" disabled>导出 Markdown</button>
+        </div>
+        <div class="feishu-row">
+          <input id="webhookInput" type="password" placeholder="飞书 Webhook URL" />
+          <input id="secretInput" type="password" placeholder="签名密钥，可空" />
+          <button id="feishuBtn" class="primary" disabled>推送飞书</button>
+        </div>
+        <pre id="reportPreview">Markdown 报告会显示在这里。</pre>
+      </section>
+
+      <section class="panel table-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">DETAIL</p>
+            <h2>反馈明细</h2>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>内容</th>
+                <th>分类</th>
+                <th>情绪</th>
+                <th>优先级</th>
+                <th>建议动作</th>
+              </tr>
+            </thead>
+            <tbody id="detailRows">
+              <tr>
+                <td colspan="6" class="empty-cell">暂无数据</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
+

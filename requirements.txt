@@ -1,0 +1,3 @@
+# Runtime dependencies: none.
+# Optional LLM mode uses an OpenAI-compatible HTTP endpoint through Python stdlib.
+
